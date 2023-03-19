@@ -6,7 +6,7 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
-      "@libs/*": ["src/libs/*"]
+      "@libs/*": ["libs/*"]
     },
     "allowJs": false,
     "skipLibCheck": true,
