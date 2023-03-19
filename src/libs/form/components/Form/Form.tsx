@@ -93,8 +93,6 @@ class CForm {
     this.state.values[name] = initialValue;
     this.state.validators[name] = validate;
     this.validate(name, initialValue);
-
-    // this.notify(['all', 'values', 'validators', `name:${name}`]);
   };
 
   deregisterField = (name: string) => {
@@ -102,8 +100,6 @@ class CForm {
     delete this.state.validators[name];
     delete this.state.errors[name];
     delete this.state.touched[name];
-
-    // this.notify(['all', 'values', 'touched', 'errors', 'validators', `name:${name}`]);
   };
 
   subscribe = (name: string, callback: (state: CForm['state']) => void) => {
