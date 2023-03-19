@@ -1,25 +1,35 @@
 import { useLayoutEffect, useMemo, useState } from 'react';
 
-import { useFormContext } from '../Form';
+import { useFormContext } from '@libs/observable-form';
+import {
+  ObservableFormCallback,
+  ObservableFormState,
+  ObservableFormValidator,
+} from '@libs/observable-form/core';
+
+import { FieldRenderer } from './Field.types';
 
 const defaultValidate = (_value: string) => {
   return undefined;
 };
 
-type RenderField = (props: {
-  inputProps: any;
-  meta: {
-    error: string | undefined;
-    touched: boolean;
-  };
-}) => React.ReactNode;
-
+/**
+ * Field component.
+ * It is responsible for registering field in form and updating field value.
+ * It also provides inputProps and meta to render function.
+ * @param name - field name
+ * @param initialValue - initial field value
+ * @param validate - field validator
+ * @param children - render function (children as render)
+ * @param render - render function (render prop)
+ * @returns
+ */
 export const Field = (props: {
   name: string;
-  initialValue?: string;
-  validate?: (value: string) => string | undefined;
-  children?: RenderField;
-  render?: RenderField;
+  initialValue?: ObservableFormState['values'][string];
+  validate?: ObservableFormValidator;
+  children?: FieldRenderer;
+  render?: FieldRenderer;
 }) => {
   const [value, setValue] = useState(props.initialValue ?? '');
   const [error, setError] = useState<string | undefined>(undefined);
@@ -47,8 +57,14 @@ export const Field = (props: {
     [error, touched],
   );
 
+  /**
+   * Register field on mount and deregister on unmount.
+   * useEffect is not used here because we want to register field before render.
+   * This is important because we want to have access to field value in render function.
+   * If we use useEffect, we will have to wait for next render to get field value.
+   */
   useLayoutEffect(() => {
-    const onUpdate = (formState: any) => {
+    const onUpdate: ObservableFormCallback = formState => {
       const nextValue = formState.values[props.name];
       const nextError = formState.errors[props.name];
       const nextTouched = formState.touched[props.name];

@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 
+import { Field, Form } from '@libs/observable-form';
+
 import './App.css';
-import { Form } from './libs/form';
-import { Field } from './libs/form/components/Field';
 
 function App() {
   return (
