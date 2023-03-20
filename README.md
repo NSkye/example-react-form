@@ -11,7 +11,7 @@ Simple but cleanly coded React form that tris to utilize SOLID principles to the
 git clone git@github.com:NSkye/example-react-form.git
 cd example-react-form
 npm i
-npm run start
+npm start
 ```
 
 ### Main highlights
