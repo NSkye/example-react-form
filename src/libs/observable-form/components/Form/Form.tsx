@@ -5,6 +5,7 @@ import {
   ObservableForm,
   ObservableFormCallback,
   ObservableFormState,
+  ObservableFormSubscribtionOptions,
   ObservableFormValidator,
 } from '@libs/observable-form/core';
 
@@ -20,8 +21,11 @@ const FormContext = createContext<{
       callback: ObservableFormCallback;
     }) => void;
     deregisterField: (name: string, callback: ObservableFormCallback) => void;
-    subscribe: (name: string, callback: ObservableFormCallback) => void;
-    unsubscribe: (name: string, callback: ObservableFormCallback) => void;
+    subscribe: (name: ObservableFormSubscribtionOptions, callback: ObservableFormCallback) => void;
+    unsubscribe: (
+      name: ObservableFormSubscribtionOptions,
+      callback: ObservableFormCallback,
+    ) => void;
   };
 } | null>(null);
 
@@ -97,14 +101,14 @@ export const Form = (props: {
   );
 
   const subscribe = useCallback(
-    (name: string, callback: ObservableFormCallback) => {
+    (name: ObservableFormSubscribtionOptions, callback: ObservableFormCallback) => {
       formState.current.subscribe(name, callback);
     },
     [formState],
   );
 
   const unsubscribe = useCallback(
-    (name: string, callback: ObservableFormCallback) => {
+    (name: ObservableFormSubscribtionOptions, callback: ObservableFormCallback) => {
       formState.current.unsubscribe(name, callback);
     },
     [formState],
