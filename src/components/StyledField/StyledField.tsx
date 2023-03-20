@@ -106,7 +106,7 @@ export const StyledField: React.ForwardRefExoticComponent<
           aria-label={config.clear}
           type="button"
           onClick={handleClear}
-          className="field__clear"
+          className={`field__clear${!props.value ? ' field__clear--hidden' : ''}`}
           aria-hidden
         >
           <CloseIcon aria-hidden width="2rem" />
