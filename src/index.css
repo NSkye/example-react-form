@@ -7,4 +7,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
+
+  --color-background: white;
+  --accent-primary: rgb(237 109 78);
+  --accent-dark: rgb(237 109 78 / 50%);
+  --text-secondary: rgb(139 139 139);
 }

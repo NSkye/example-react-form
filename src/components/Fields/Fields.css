@@ -17,7 +17,7 @@
   padding-bottom: .7rem;
   font-size: 1.2rem;
   line-height: 1.2rem;
-  color: rgb(139 139 139);
+  color: var(--text-secondary, rgb(139 139 139));
   text-align: center;
   border: 0;
 }

@@ -8,7 +8,7 @@
   width: 100%;
   padding: 0;
   padding-bottom: 2rem;
-  color: rgb(139 139 139);
+  color: var(--text-secondary, rgb(139 139 139));
   border: 0;
 }
 
@@ -23,7 +23,7 @@
   padding: 1.2rem 1.7rem;
   padding-right: 3rem;
   font-size: 1rem;
-  border: 1px solid rgb(237 109 78);
+  border: 1px solid var(--accent-primary, rgb(237 109 78 / 50%));
   border-radius: .3rem;
 }
 
@@ -42,9 +42,9 @@
   margin-left: 1rem;
   font-size: .8rem;
   line-height: .8rem;
-  color: rgb(237 109 78);
+  color: var(--accent-primary, rgb(237 109 78));
   text-transform: lowercase;
-  background-color: white;
+  background-color: var(--color-background, white);
   transform: translate(0, 50%);
 }
 
@@ -61,7 +61,7 @@
   background: none;
   border: none;
   opacity: .5;
-  fill: rgb(139 139 139);
+  fill: var(--text-secondary, rgb(139 139 139));
   transform: translate(0, -50%);
   appearance: none;
 }
