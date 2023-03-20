@@ -1,12 +1,12 @@
 import { useCallback, useId, useMemo } from 'react';
 
 import { Field, Form, Watch } from '@libs/observable-form';
+import { ObservableFormState } from '@libs/observable-form/core';
 
-import { ObservableFormState } from '@/libs/observable-form/core';
+import { validate } from '@/helpers';
 
 import './Fields.css';
 import { FieldConfig, FieldsComponent } from './Fields.types';
-import { validate } from './helpers';
 
 const VALUES: ['values'] = ['values'];
 const ERRORS: ['errors'] = ['errors'];
