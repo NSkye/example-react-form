@@ -82,7 +82,10 @@ export const Field = (props: {
     });
 
     return () => deregisterField(props.name, onUpdate);
-  }, [props.name, props.initialValue, props.validate, registerField, deregisterField]);
+
+    // Need to disable exhaustive deps because we want to register field only once.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return useMemo(
     () => <>{render ? render({ inputProps, meta }) : null}</>,

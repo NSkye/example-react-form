@@ -1,4 +1,4 @@
-import { deepCopy } from '@/libs/observable-form';
+import { deepCopy } from '../tools';
 
 import {
   ObservableFormCallback,
@@ -34,6 +34,7 @@ export class ObservableForm {
   subscribe = (name: ObservableFormSubscribtionOptions, callback: ObservableFormCallback) => {
     const set = this.subscribtions.get(name) || new Set();
     set.add(callback);
+    if (this.subscribtions.has(name)) return;
     this.subscribtions.set(name, set);
   };
 

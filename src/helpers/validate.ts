@@ -1,4 +1,4 @@
-import { FieldConfig } from '../Fields.types';
+import { FieldConfig } from '@/components/Fields/Fields.types';
 
 const validateCompose =
   (...validators: Array<(value: string) => string | undefined>) =>

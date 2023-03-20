@@ -1,62 +1,74 @@
-import { useId } from 'react';
+import { useCallback, useMemo } from 'react';
 
-import { Field, Form, Watch, toSubscribtionName } from '@libs/observable-form';
+import { Field, Form, Watch } from '@libs/observable-form';
+import { ObservableFormState } from '@libs/observable-form/core';
 
-import { FieldConfig, FieldsComponent } from './Fields.types';
-import { validate } from './helpers';
+import { validate } from '@/helpers';
 
-const getInputType = (typeInConfig: FieldConfig<never>['type']) =>
-  ({
-    inputText: 'text',
-    inputEmail: 'email',
-    inputPassword: 'password',
-  }[typeInConfig]);
+import { StyledField } from '../StyledField';
 
-export const Fields: FieldsComponent = ({ fields }) => {
-  const id = useId();
-  const makeId = (fieldId: string) => `${id}-${fieldId}`;
-  const hintId = (fieldId: string) => `${makeId(fieldId)}-hint`;
+import './Fields.css';
+import { FieldsComponent } from './Fields.types';
 
-  const renderedFields = fields.map(field => {
-    const inputId = makeId(field.id);
-    const hintInputId = hintId(field.id);
+const VALUES: ['values'] = ['values'];
+const ERRORS: ['errors'] = ['errors'];
 
-    return (
-      <Field
-        key={field.id}
-        name={field.id}
-        initialValue={field.defaultValue}
-        validate={validate(field)}
-      >
-        {({ inputProps, meta }) => (
-          <div>
-            <label htmlFor={inputId}>{field.label}</label>
-            <input
-              type={getInputType(field.type)}
-              aria-describedby={hintInputId}
-              id={inputId}
-              {...inputProps}
-            />
-            <p role="alert" aria-live="assertive" aria-relevant="text" id={hintInputId}>
-              {meta.touched && !!meta.error && meta.error}
-            </p>
-          </div>
+export const Fields: FieldsComponent = ({ fields, onChange, onValid, description }) => {
+  const handleChange = useCallback(
+    (state: ObservableFormState) => {
+      onChange?.(state.values as Record<(typeof fields)[number]['id'], string>);
+    },
+    [onChange],
+  );
+
+  const handleErrors = useCallback(
+    (state: ObservableFormState) => {
+      const errors = state.errors;
+      const hasErrors = Object.values(errors).some(error => !!error);
+      onValid?.(hasErrors);
+    },
+    [onValid],
+  );
+
+  const renderedFields = useMemo(
+    () =>
+      fields.map(field => {
+        return (
+          <Field
+            key={field.id}
+            name={field.id}
+            initialValue={field.defaultValue}
+            validate={validate(field)}
+          >
+            {({ inputProps, meta }) => (
+              <StyledField
+                type={field.type}
+                required={field.required}
+                label={field.label}
+                defaultValue={field.defaultValue}
+                {...meta}
+                {...inputProps}
+              />
+            )}
+          </Field>
+        );
+      }),
+    [fields],
+  );
+
+  return useMemo(
+    () => (
+      <Form>
+        {() => (
+          <fieldset className="fields">
+            {description && <legend className="legend">{description}</legend>}
+            {renderedFields}
+            <Watch changes={VALUES} onChange={handleChange} />
+            <Watch changes={ERRORS} onChange={handleErrors} />
+          </fieldset>
         )}
-      </Field>
-    );
-  });
-
-  return (
-    <Form>
-      {() => (
-        <div>
-          {renderedFields}
-          <Watch
-            changes={fields.map(({ id }) => toSubscribtionName(id))}
-            onChange={state => console.log(state.values)}
-          />
-        </div>
-      )}
-    </Form>
+      </Form>
+    ),
+    [description, handleChange, handleErrors, renderedFields],
   );
 };
