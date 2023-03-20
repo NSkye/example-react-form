@@ -20,6 +20,7 @@ const validateCompose =
  * or (better) ditch email validation altogether. See: https://stackoverflow.com/a/201378
  */
 const validateEmail = (value: string) => {
+  // corresponds to RFC 822 but allows for more than one @ symbol (which is invalid) and allows for no TLD (which is also invalid) but is good enough for this example
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   return emailRegex.test(value) ? undefined : config.emailIsInvalid;
 };
