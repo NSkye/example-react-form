@@ -2,7 +2,7 @@
 
 Simple but cleanly coded React form that tris to utilize SOLID principles to the full extent. Written by me for demonstration and as a template/reference material.
 
-<img width="657" alt="image" src="https://user-images.githubusercontent.com/30626748/226417620-cdb9069c-ff52-430d-b66f-4689f26c92ba.png">
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/30626748/226417620-cdb9069c-ff52-430d-b66f-4689f26c92ba.png">
 
 ### Installation
 
