@@ -1,28 +1,19 @@
-import { useCallback, useId, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { Field, Form, Watch } from '@libs/observable-form';
 import { ObservableFormState } from '@libs/observable-form/core';
 
 import { validate } from '@/helpers';
 
+import { StyledField } from '../StyledField';
+
 import './Fields.css';
-import { FieldConfig, FieldsComponent } from './Fields.types';
+import { FieldsComponent } from './Fields.types';
 
 const VALUES: ['values'] = ['values'];
 const ERRORS: ['errors'] = ['errors'];
 
-const getInputType = (typeInConfig: FieldConfig<never>['type']) =>
-  ({
-    inputText: 'text',
-    inputEmail: 'email',
-    inputPassword: 'password',
-  }[typeInConfig]);
-
 export const Fields: FieldsComponent = ({ fields, onChange, onValid, description }) => {
-  const id = useId();
-  const makeId = useCallback((fieldId: string) => `${id}-${fieldId}`, [id]);
-  const hintId = useCallback((fieldId: string) => `${makeId(fieldId)}-hint`, [makeId]);
-
   const handleChange = useCallback(
     (state: ObservableFormState) => {
       onChange?.(state.values as Record<(typeof fields)[number]['id'], string>);
@@ -42,9 +33,6 @@ export const Fields: FieldsComponent = ({ fields, onChange, onValid, description
   const renderedFields = useMemo(
     () =>
       fields.map(field => {
-        const inputId = makeId(field.id);
-        const hintInputId = hintId(field.id);
-
         return (
           <Field
             key={field.id}
@@ -53,34 +41,19 @@ export const Fields: FieldsComponent = ({ fields, onChange, onValid, description
             validate={validate(field)}
           >
             {({ inputProps, meta }) => (
-              <div className="field">
-                <div className="field__with-hint">
-                  <input
-                    className="field__input"
-                    type={getInputType(field.type)}
-                    required={field.required}
-                    placeholder={field.label}
-                    aria-describedby={hintInputId}
-                    aria-label={field.label}
-                    id={inputId}
-                    {...inputProps}
-                  />
-                  <p
-                    className="field__hint"
-                    role="alert"
-                    aria-live="assertive"
-                    aria-relevant="text"
-                    id={hintInputId}
-                  >
-                    {meta.touched && !!meta.error && meta.error}
-                  </p>
-                </div>
-              </div>
+              <StyledField
+                type={field.type}
+                required={field.required}
+                label={field.label}
+                defaultValue={field.defaultValue}
+                {...meta}
+                {...inputProps}
+              />
             )}
           </Field>
         );
       }),
-    [fields, hintId, makeId],
+    [fields],
   );
 
   return useMemo(
