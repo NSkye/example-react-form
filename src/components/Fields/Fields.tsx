@@ -3,9 +3,8 @@ import { useCallback, useMemo } from 'react';
 import { Field, Form, Watch } from '@libs/observable-form';
 import { ObservableFormState } from '@libs/observable-form/core';
 
+import { SemanticInput } from '@/components/SemanticInput';
 import { validate } from '@/helpers';
-
-import { StyledField } from '../StyledField';
 
 import './Fields.css';
 import { FieldsComponent } from './Fields.types';
@@ -41,7 +40,7 @@ export const Fields: FieldsComponent = ({ fields, onChange, onValid, description
             validate={validate(field)}
           >
             {({ inputProps, meta }) => (
-              <StyledField
+              <SemanticInput
                 type={field.type}
                 required={field.required}
                 label={field.label}

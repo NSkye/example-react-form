@@ -9,9 +9,9 @@ import { useCaret } from '@/hooks';
 
 import { FieldConfig } from '../Fields';
 
-import './StyledField.css';
+import './SemanticField.css';
 
-export const StyledField: React.ForwardRefExoticComponent<
+export const SemanticInput: React.ForwardRefExoticComponent<
   {
     type: FieldConfig<string>['type'];
     required?: FieldConfig<string>['required'];
