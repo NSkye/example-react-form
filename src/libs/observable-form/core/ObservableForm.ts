@@ -1,16 +1,20 @@
+import { deepCopy } from '@/libs/observable-form';
+
 import {
   ObservableFormCallback,
   ObservableFormState,
+  ObservableFormSubscribtionOptions,
   ObservableFormValidator,
 } from './ObservableForm.types';
 
 export class ObservableForm {
   state: ObservableFormState;
-  subscribtions: Map<string, Set<ObservableFormCallback>>;
+  subscribtions: Map<ObservableFormSubscribtionOptions, Set<ObservableFormCallback>>;
   notificationTimeout: Parameters<typeof clearTimeout>[0];
-  waitingToNotify: string[] = [];
+  waitingToNotify: ObservableFormSubscribtionOptions[] = [];
+  safeMode: boolean;
 
-  constructor() {
+  constructor(safe = true) {
     this.state = {
       values: {},
       validators: {},
@@ -19,6 +23,7 @@ export class ObservableForm {
       submitting: false,
     };
     this.subscribtions = new Map();
+    this.safeMode = safe;
   }
 
   /**
@@ -26,7 +31,7 @@ export class ObservableForm {
    * @param name - Name of the field.
    * @param callback - Callback to be called when the state changes.
    */
-  subscribe = (name: string, callback: ObservableFormCallback) => {
+  subscribe = (name: ObservableFormSubscribtionOptions, callback: ObservableFormCallback) => {
     const set = this.subscribtions.get(name) || new Set();
     set.add(callback);
     this.subscribtions.set(name, set);
@@ -37,7 +42,7 @@ export class ObservableForm {
    * @param name - Name of the field.
    * @param callback - Callback that was previously passed to `subscribe`.
    */
-  unsubscribe = (name: string, callback: ObservableFormCallback) => {
+  unsubscribe = (name: ObservableFormSubscribtionOptions, callback: ObservableFormCallback) => {
     const set = this.subscribtions.get(name);
 
     if (set) {
@@ -53,7 +58,7 @@ export class ObservableForm {
    * Notify all subscribers about state changes.
    * @param subscribtionTypes - List of subscribtion types to notify.
    */
-  notify = (subscribtionTypes: string[]) => {
+  notify = (subscribtionTypes: ObservableFormSubscribtionOptions[]) => {
     this.waitingToNotify = this.waitingToNotify.concat(subscribtionTypes);
     clearTimeout(this.notificationTimeout);
 
@@ -65,7 +70,9 @@ export class ObservableForm {
         .flat();
 
       // Set is used to avoid notifying the same callback multiple times.
-      new Set(subscribtions).forEach(callback => callback(this.state));
+      new Set(subscribtions).forEach(callback =>
+        callback(this.safeMode ? deepCopy(this.state) : this.state),
+      );
       this.waitingToNotify = [];
     }, 0);
   };
@@ -160,7 +167,7 @@ export class ObservableForm {
    * @param errors
    */
   updateErrors = (errors: ObservableFormState['errors']) => {
-    const erroredFields = [];
+    const erroredFields: ObservableFormSubscribtionOptions[] = [];
 
     for (const [name, error] of Object.entries(errors)) {
       if (error === this.state.errors[name]) continue;

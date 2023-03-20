@@ -11,3 +11,13 @@ export type ObservableFormCallback = (state: ObservableFormState) => void;
 export type ObservableFormValidator = (
   value: ObservableFormState['values'][string],
 ) => ObservableFormState['errors'][string];
+
+export type ObservableFormSubscribtionOptions =
+  | 'all'
+  | 'values'
+  | 'errors'
+  | 'touched'
+  | 'submitting'
+  | 'validators'
+  | 'none'
+  | `name:${string}`;

@@ -1,6 +1,6 @@
 import { useId } from 'react';
 
-import { Field, Form } from '@libs/observable-form';
+import { Field, Form, Watch, toSubscribtionName } from '@libs/observable-form';
 
 import { FieldConfig, FieldsComponent } from './Fields.types';
 import { validate } from './helpers';
@@ -46,5 +46,17 @@ export const Fields: FieldsComponent = ({ fields }) => {
     );
   });
 
-  return <Form>{() => <div>{renderedFields}</div>}</Form>;
+  return (
+    <Form>
+      {() => (
+        <div>
+          {renderedFields}
+          <Watch
+            changes={fields.map(({ id }) => toSubscribtionName(id))}
+            onChange={state => console.log(state.values)}
+          />
+        </div>
+      )}
+    </Form>
+  );
 };
