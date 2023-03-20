@@ -7,8 +7,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
-    "prettify": "prettier --write src/**/*.{ts,tsx,css}"
+    "lint:ts": "eslint --ext .ts,.tsx,.js,.jsx src",
+    "lint:css": "stylelint '**/*.css'",
+    "lint:ts:fix": "eslint --ext .ts,.tsx,.js,.jsx src --fix",
+    "lint:css:fix": "stylelint '**/*.css' --fix",
+    "lint": "npm run lint:ts && npm run lint:css",
+    "lint:fix": "npm run lint:ts:fix && npm run lint:css:fix",
+    "prettify": "prettier --write src/**/*.{ts,tsx,css}",
+    "fix-all-formatting": "npm run lint:fix && npm run prettify"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -24,6 +30,9 @@
     "eslint": "^8.36.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "stylelint": "^15.3.0",
+    "stylelint-config-recess-order": "^4.0.0",
+    "stylelint-config-standard": "^31.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.2.0"
   }

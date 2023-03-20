@@ -1,44 +1,43 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-  font-size: 16px;
-
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  height: 100vh;
+  padding: 0;
+  margin: 0 auto;
+  font-size: 16px;
+  text-align: center;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   max-width: 400px;
 }
 
 .App {
   position: relative;
+  box-sizing: border-box;
   padding: 3rem 5.5rem;
   padding-top: 5.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 0 .3rem rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
   background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0 .3rem rgb(0 0 0 / 20%);
 }
 
 .App__illustration {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   display: flex;
   justify-content: center;
-  transform: translate(1rem, -52%);
+  width: 100%;
   pointer-events: none;
+  transform: translate(1rem, -52%);
 }
 
 .App__image {
@@ -48,12 +47,12 @@
 }
 
 .App__heading {
+  padding: 0;
+  margin: 0;
+  margin-bottom: .5rem;
   font-size: 1.7rem;
   font-weight: 600;
   line-height: 1.7rem;
-  margin: 0;
-  padding: 0;
-  margin-bottom: .5rem;
 }
 
 .App__caption {
@@ -63,18 +62,18 @@
 }
 
 .form__submit {
-  border: none;
-  color: white;
-  background-color: rgb(237, 109, 78);
   padding: 1.5rem 4.5rem;
   margin-top: 1rem;
-  border-radius: .3rem;
-  line-height: 1.2rem;
   font-size: 1.5rem;
+  line-height: 1.2rem;
+  color: white;
   cursor: pointer;
+  background-color: rgb(237 109 78);
+  border: none;
+  border-radius: .3rem;
 }
 
 .form__submit:disabled {
-  background-color: rgb(237, 109, 78, 0.5);
   cursor: not-allowed;
+  background-color: rgb(237 109 78 / 50%);
 }

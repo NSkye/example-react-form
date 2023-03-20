@@ -1,30 +1,30 @@
 .field {
   position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 0 0;
-  padding-bottom: 2rem;
-  color: rgb(139, 139, 139);
-  border: 0;
   display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  padding-bottom: 2rem;
+  color: rgb(139 139 139);
+  border: 0;
 }
 
 .field__input {
+  box-sizing: border-box;
   display: flex;
+  display: block;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 1.2rem 1.7rem;
   padding-right: 3rem;
-  border-radius: .3rem;
-  border: 1px solid rgb(237, 109, 78);
   font-size: 1rem;
-  display: block;
-  box-sizing: border-box;
+  border: 1px solid rgb(237 109 78);
+  border-radius: .3rem;
 }
 
 .field__with-hint {
@@ -34,34 +34,34 @@
 
 .field__hint {
   position: absolute;
-  display: flex;
-  text-transform: lowercase;
   bottom: 0;
   left: 0;
+  display: flex;
+  padding: 0 0.3rem;
   margin: 0;
   margin-left: 1rem;
-  padding: 0 0.3rem;
   font-size: .8rem;
   line-height: .8rem;
-  transform: translate(0, 50%);
+  color: rgb(237 109 78);
+  text-transform: lowercase;
   background-color: white;
-  color: rgb(237, 109, 78);
+  transform: translate(0, 50%);
 }
 
 .field__clear {
-  fill: rgb(139, 139, 139);
   position: absolute;
   top: 50%;
   right: 0;
-  transform: translate(0, -50%);
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  margin-right: 1rem;
-  opacity: .5;
-  cursor: pointer;
   display: flex;
   align-items: baseline;
   justify-content: center;
+  padding: 0;
+  margin-right: 1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  opacity: .5;
+  fill: rgb(139 139 139);
+  transform: translate(0, -50%);
+  appearance: none;
 }
