@@ -76,9 +76,9 @@ export const StyledField: React.ForwardRefExoticComponent<
 
     const input = ref.current;
 
-    if (input && selectionRange && selectionRange.selectionStart) {
-      const newPosition = selectionRange.selectionStart + (props.value.length - input.value.length);
-
+    if (input && selectionRange) {
+      const newPosition =
+        selectionRange.selectionStart ?? 0 + (props.value.length - input.value.length);
       if (input === document.activeElement) {
         input.setSelectionRange(newPosition, newPosition);
       }
