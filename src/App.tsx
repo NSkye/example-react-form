@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
 
-import { Fields } from '@/components/Fields';
+import { Fields, FieldsConfig } from '@/components/Fields';
 
 import './App.css';
+import config from './app.config.json';
 import illustration from './assets/woman-tipping-hand.png';
 
 function App() {
@@ -30,44 +31,16 @@ function App() {
       <div aria-hidden className="App__illustration">
         <img src={illustration} className="App__image" alt="illustration" />
       </div>
-      <h2 className="App__heading">Авторизация</h2>
+      <h2 className="App__heading">{config.title}</h2>
       <form className="form" onSubmit={onSubmit}>
         <Fields
           onValid={handleValid}
-          description={
-            <p className="App__caption">
-              Для доступа к личному кабинету вашей компании авторизуйтесь на сайте.
-            </p>
-          }
+          description={<p className="App__caption">{config.description}</p>}
           onChange={handleChange}
-          fields={[
-            {
-              id: 'first_name',
-              type: 'inputText',
-              label: 'First Name',
-              defaultValue: 'Some first name',
-            },
-            {
-              id: 'last_name',
-              type: 'inputText',
-              label: 'Last Name',
-            },
-            {
-              id: 'email',
-              type: 'inputEmail',
-              label: 'Email',
-              required: true,
-            },
-            {
-              id: 'password',
-              type: 'inputPassword',
-              label: 'Password',
-              required: true,
-            },
-          ]}
+          fields={config.fields as FieldsConfig<string>}
         />
         <button className="form__submit" onSubmit={onSubmit} type="submit" disabled={!isValid}>
-          Войти
+          {config.submit}
         </button>
       </form>
     </div>

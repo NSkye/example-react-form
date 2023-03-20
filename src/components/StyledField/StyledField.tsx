@@ -2,6 +2,7 @@ import { forwardRef, useCallback, useEffect, useId, useRef, useState } from 'rea
 
 import { FormHandlers } from '@libs/observable-form';
 
+import config from '@/app.config.json';
 import { CloseIcon } from '@/components/CloseIcon';
 import { getInputType } from '@/helpers';
 
@@ -86,7 +87,7 @@ export const StyledField: React.ForwardRefExoticComponent<
 
   return (
     <div className="field">
-      <div className="field__with-hint">
+      <label htmlFor={id} aria-label={props.label} className="field__with-hint">
         <input
           ref={ref}
           className="field__input"
@@ -101,8 +102,14 @@ export const StyledField: React.ForwardRefExoticComponent<
           aria-label={props.label}
           id={id}
         />
-        <button type="button" onClick={handleClear} className="field__clear" aria-hidden>
-          <CloseIcon width="2rem" />
+        <button
+          aria-label={config.clear}
+          type="button"
+          onClick={handleClear}
+          className="field__clear"
+          aria-hidden
+        >
+          <CloseIcon aria-hidden width="2rem" />
         </button>
         <p
           className="field__hint"
@@ -113,7 +120,7 @@ export const StyledField: React.ForwardRefExoticComponent<
         >
           {props.touched && !!props.error && props.error}
         </p>
-      </div>
+      </label>
     </div>
   );
 });
