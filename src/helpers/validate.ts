@@ -1,3 +1,4 @@
+import config from '@/app.config.json';
 import { FieldConfig } from '@/components/Fields/Fields.types';
 
 const validateCompose =
@@ -15,11 +16,11 @@ const validateCompose =
 
 const validateEmail = (value: string) => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-  return emailRegex.test(value) ? undefined : 'Invalid email address';
+  return emailRegex.test(value) ? undefined : config.emailIsInvalid;
 };
 
 const validateRequired = (value: string) => {
-  return value ? undefined : 'Required';
+  return value ? undefined : config.fieldIsRequired;
 };
 
 export const validate = (field: Pick<FieldConfig<string>, 'type' | 'required'>) => {
