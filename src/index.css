@@ -13,3 +13,9 @@
   --accent-dark: rgb(237 109 78 / 50%);
   --text-secondary: rgb(139 139 139);
 }
+
+@media screen and (max-width: 768px) {
+  :root {
+    background-color: white;
+  }
+}

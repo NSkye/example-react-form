@@ -11,6 +11,13 @@
   text-align: center;
 }
 
+@media screen and (min-width: 768px) {
+  #root {
+    font-size: 18px;
+    max-width: 100%;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -76,4 +83,24 @@
 .form__submit:disabled {
   cursor: not-allowed;
   background-color: var(--accent-dark, rgb(237 109 78 / 50%));
+}
+
+@media screen and (max-width: 768px) {
+  #root {
+    width: 100%;
+  }
+  .App {
+    padding: 0;
+    max-width: 100%;
+    box-shadow: none;
+    background: none;
+  }
+
+  .App__illustration {
+    transform: translate(0.4rem, calc(-100% - 0.5rem));
+  }
+
+  .App__image {
+    max-width: 3rem;
+  }
 }
