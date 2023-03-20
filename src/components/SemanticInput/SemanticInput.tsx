@@ -9,7 +9,7 @@ import { useCaret } from '@/hooks';
 
 import { FieldConfig } from '../Fields';
 
-import './SemanticField.css';
+import './SemanticInput.css';
 
 export const SemanticInput: React.ForwardRefExoticComponent<
   {
