@@ -24,7 +24,7 @@
   box-sizing: border-box;
   padding: 3rem 5.5rem;
   padding-top: 5.5rem;
-  background-color: #fff;
+  background-color: var(--color-background, white);
   border-radius: 1rem;
   box-shadow: 0 0 .3rem rgb(0 0 0 / 20%);
 }
@@ -68,12 +68,12 @@
   line-height: 1.2rem;
   color: white;
   cursor: pointer;
-  background-color: rgb(237 109 78);
+  background-color: var(--accent-primary, rgb(237 109 78));
   border: none;
   border-radius: .3rem;
 }
 
 .form__submit:disabled {
   cursor: not-allowed;
-  background-color: rgb(237 109 78 / 50%);
+  background-color: var(--accent-dark, rgb(237 109 78 / 50%));
 }
