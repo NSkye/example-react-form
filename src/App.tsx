@@ -1,58 +1,37 @@
-import { Fragment } from 'react';
-
-import { Field, Form } from '@libs/observable-form';
+import { Fields } from '@/components/Fields';
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Form>
-        {() => (
-          <Fragment>
-            <div>
-              <Field name="email" initialValue="foo@bar.com">
-                {({ inputProps, meta }) => (
-                  <div>
-                    <label>
-                      <div>Email</div>
-                      <input
-                        id="email"
-                        type="text"
-                        name={inputProps.name}
-                        onBlur={inputProps.onBlur}
-                        onChange={inputProps.onChange}
-                        value={inputProps.value}
-                      />
-                    </label>
-                    {meta.touched && meta.error && <div>{meta.error}</div>}
-                  </div>
-                )}
-              </Field>
-            </div>
-            <div>
-              <Field name="password">
-                {({ inputProps, meta }) => (
-                  <div>
-                    <label>
-                      <div>Password</div>
-                      <input
-                        id="password"
-                        type="text"
-                        name={inputProps.name}
-                        onBlur={inputProps.onBlur}
-                        onChange={inputProps.onChange}
-                        value={inputProps.value}
-                      />
-                    </label>
-                    {meta.touched && meta.error && <div>{meta.error}</div>}
-                  </div>
-                )}
-              </Field>
-            </div>
-          </Fragment>
-        )}
-      </Form>
+      <Fields
+        fields={[
+          {
+            id: 'first_name',
+            type: 'inputText',
+            label: 'First Name',
+            defaultValue: 'Some first name',
+          },
+          {
+            id: 'last_name',
+            type: 'inputText',
+            label: 'Last Name',
+          },
+          {
+            id: 'email',
+            type: 'inputEmail',
+            label: 'Email',
+            required: true,
+          },
+          {
+            id: 'password',
+            type: 'inputPassword',
+            label: 'Password',
+            required: true,
+          },
+        ]}
+      />
     </div>
   );
 }
