@@ -14,6 +14,11 @@ const validateCompose =
     return undefined;
   };
 
+/**
+ * Only for example purposes, in practice email can take almost any
+ * shape or form so it's better to use specific library for validation
+ * or (better) ditch email validation altogether. See: https://stackoverflow.com/a/201378
+ */
 const validateEmail = (value: string) => {
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   return emailRegex.test(value) ? undefined : config.emailIsInvalid;
