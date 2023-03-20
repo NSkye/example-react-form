@@ -28,7 +28,8 @@
 }
 
 .field__with-hint {
-  position: relative
+  position: relative;
+  display: block;
 }
 
 .field__hint {

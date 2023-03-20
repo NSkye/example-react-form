@@ -1,0 +1,34 @@
+{
+  "fieldIsRequired": "Required",
+  "emailIsInvalid": "Invalid email",
+  "title": "Sign Up",
+  "description": "Please fill in the form below to sign up.",
+  "submit": "Sign Up",
+  "clear": "Clear",
+  "fields": [
+    {
+      "id": "first_name",
+      "type": "inputText",
+      "label": "First Name",
+      "defaultValue": "John"
+    },
+    {
+      "id": "last_name",
+      "type": "inputText",
+      "label": "Last Name",
+      "defaultValue": "Doe"
+    },
+    {
+      "id": "email",
+      "type": "inputEmail",
+      "label": "Email",
+      "required": true
+    },
+    {
+      "id": "password",
+      "type": "inputPassword",
+      "label": "Password",
+      "required": true
+    }
+  ]
+}
